@@ -14,8 +14,8 @@ from random import *
 import requests
 
 token = 'EAABgFOnpxJoBAKK6l2bhOlcHesBSadHUQYWEbUeiBA1MIpwFZAMXNRqVZB6xiS5g5HI7WcgqnvCiZCExK7gPykKeW5qQwxhKZBtHoxgwg4AwxgLpav78fZCcmeidRX1pnhrZBWNgbhqrJtCMZAfu2L7q438JgYbDHS7RccvbiDZBleVUXe4rXP6bRwqvybL1q3JNZBYf41b3J12KKCLj2dIlt'
-# targeturl='raylovelulumi'
-targeturl='DoctorKoWJ'
+targeturl='raylovelulumi'
+# targeturl='DoctorKoWJ'
 
 
 url = 'https://graph.facebook.com/v3.1/'+targeturl+'?fields=feed%7Battachments%2Cmessage%7D&access_token='+token
@@ -50,17 +50,28 @@ while post < postcount:
     print(res['feed']['data'][post]['attachments']['data'][0]['type'])## 
     print(res['feed']['data'][post]['attachments']['data'][0]['url'])##貼文url
     # exit()
-
+    
+    piclist = []
     if 'subattachments' in res['feed']['data'][post]['attachments']['data'][0]:
         
         picturelecount = len(res['feed']['data'][post]['attachments']['data'][0]['subattachments']['data'])
         picture = 0
         
         while picture < picturelecount:
-            print(res['feed']['data'][post]['attachments']['data'][0]['subattachments']['data'][picture]['media']['image']['src'])
-            print(res['feed']['data'][post]['attachments']['data'][0]['subattachments']['data'][picture]['media']['image']['height'])
-            print(res['feed']['data'][post]['attachments']['data'][0]['subattachments']['data'][picture]['media']['image']['width'])
+            SRC = res['feed']['data'][post]['attachments']['data'][0]['subattachments']['data'][picture]['media']['image']['src']
+            print(SRC)
+            HEIGHT = res['feed']['data'][post]['attachments']['data'][0]['subattachments']['data'][picture]['media']['image']['height']
+            print(HEIGHT)
+            WIDTH = res['feed']['data'][post]['attachments']['data'][0]['subattachments']['data'][picture]['media']['image']['width']
+            print(WIDTH)
+            piclist.append(SRC)
             picture = picture + 1
+            # if picture == (picturelecount - 1):
+            #     print(XXX)
+            #     exit()
+
+        # print(piclist)
+        # exit()
     else:
         print(res['feed']['data'][post]['attachments']['data'][0]['media']['image']['src'])##
         print(res['feed']['data'][post]['attachments']['data'][0]['media']['image']['height'])##
@@ -68,6 +79,8 @@ while post < postcount:
     ## post 最後加
     
     post = post + 1
+    # print(piclist)
+    # exit()
 # print(res['feed']['data'][''])
 # message = html['posts']['data'][0]['message']
 # print(message.encode('utf-8'))
